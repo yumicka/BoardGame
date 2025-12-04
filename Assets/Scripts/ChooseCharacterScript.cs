@@ -46,12 +46,12 @@ public class ChooseCharacterScript : MonoBehaviour
     public void Play()
     {
         characterName = inputField.GetComponent<TMPro.TMP_InputField>().text;
-        if(characterName.Length > 3)
+        if(characterName.Length >= 3)
         {
             PlayerPrefs.SetInt("SelecterCharacter", characterIndex);
             PlayerPrefs.SetString("PlayerName", characterName);
             PlayerPrefs.SetInt("PlayerCount", playerCount);
-           // StartCoroutine(sceneChanger.Delay("play"), characterIndex, characterName);
+            StartCoroutine(sceneChanger.Delay("play", characterIndex, characterName));
         }
         else
         {
