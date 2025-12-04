@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class SetActiveButtonScript : MonoBehaviour
 {
-    public GameObject targetObject;
-    
+    public GameObject[] targetObjects;
     public void ToggleActiveAfterDelay(float delay)
     {
         StartCoroutine(ToggleActiveCoroutine(delay));
@@ -13,7 +12,13 @@ public class SetActiveButtonScript : MonoBehaviour
     private IEnumerator ToggleActiveCoroutine(float delay)
     {
         yield return new WaitForSeconds(delay);
-        targetObject.SetActive(!targetObject.activeSelf);
+
+        foreach (var obj in targetObjects)
+        {
+            if (obj != null)
+                obj.SetActive(!obj.activeSelf);
+        }
+
         gameObject.SetActive(!gameObject.activeSelf);
     }
 }
