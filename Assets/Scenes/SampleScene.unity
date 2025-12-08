@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 103723728}
   - component: {fileID: 103723727}
   - component: {fileID: 103723726}
+  - component: {fileID: 103723730}
   m_Layer: 5
   m_Name: 'SettingsButton '
   m_TagString: Untagged
@@ -382,7 +383,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1974156656}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: SetActiveButtonScript, Assembly-CSharp
           m_MethodName: ToggleActiveAfterDelay
           m_Mode: 4
@@ -453,7 +454,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 103723728}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 103723730}
+        m_TargetAssemblyTypeName: SetActiveButtonScript, Assembly-CSharp
+        m_MethodName: ToggleActiveAfterDelay
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &103723728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +505,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103723724}
   m_CullTransparentMesh: 1
+--- !u!114 &103723730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103723724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d76a0964ad3a1448706da0cf801c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allScreens:
+  - {fileID: 1974156654}
+  - {fileID: 485724863}
+  - {fileID: 1520491548}
+  targetScreen: {fileID: 1520491548}
 --- !u!1 &151896134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,8 +2380,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d76a0964ad3a1448706da0cf801c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObjects:
+  allScreens:
   - {fileID: 1974156654}
+  - {fileID: 485724863}
+  - {fileID: 1520491548}
+  targetScreen: {fileID: 1974156654}
 --- !u!1 &488173219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,6 +2795,7 @@ GameObject:
   - component: {fileID: 561887219}
   - component: {fileID: 561887218}
   - component: {fileID: 561887221}
+  - component: {fileID: 561887222}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -2832,7 +2866,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 561887219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 561887222}
+        m_TargetAssemblyTypeName: SetActiveButtonScript, Assembly-CSharp
+        m_MethodName: ToggleActiveAfterDelay
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &561887219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2940,9 +2986,9 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1974156656}
+        - m_Target: {fileID: 887427066}
           m_TargetAssemblyTypeName: SetActiveButtonScript, Assembly-CSharp
-          m_MethodName: ToggleActiveAfterDelay
+          m_MethodName: 
           m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -2968,6 +3014,23 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &561887222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561887216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d76a0964ad3a1448706da0cf801c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allScreens:
+  - {fileID: 1974156654}
+  - {fileID: 485724863}
+  - {fileID: 1520491548}
+  targetScreen: {fileID: 485724863}
 --- !u!1 &598865975
 GameObject:
   m_ObjectHideFlags: 0
@@ -6632,10 +6695,10 @@ RectTransform:
   - {fileID: 1718399279}
   m_Father: {fileID: 1781297674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1952, y: 754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1520491550
 MonoBehaviour:
@@ -6649,8 +6712,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d76a0964ad3a1448706da0cf801c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObjects:
+  allScreens:
   - {fileID: 1974156654}
+  - {fileID: 485724863}
+  - {fileID: 1520491548}
+  targetScreen: {fileID: 1974156654}
 --- !u!1 &1534983316
 GameObject:
   m_ObjectHideFlags: 0
@@ -7958,6 +8024,7 @@ GameObject:
   - component: {fileID: 1965434705}
   - component: {fileID: 1965434704}
   - component: {fileID: 1965434703}
+  - component: {fileID: 1965434707}
   m_Layer: 5
   m_Name: DontSave
   m_TagString: Untagged
@@ -8125,7 +8192,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1965434705}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1520491550}
+        m_TargetAssemblyTypeName: SetActiveButtonScript, Assembly-CSharp
+        m_MethodName: ToggleActiveAfterDelay
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1965434705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8164,6 +8243,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965434701}
   m_CullTransparentMesh: 1
+--- !u!114 &1965434707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965434701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d76a0964ad3a1448706da0cf801c02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allScreens:
+  - {fileID: 1974156654}
+  - {fileID: 485724863}
+  - {fileID: 1520491548}
+  targetScreen: {fileID: 1974156654}
 --- !u!1 &1974156654
 GameObject:
   m_ObjectHideFlags: 0
@@ -8173,7 +8269,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1974156655}
-  - component: {fileID: 1974156656}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -8204,21 +8299,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1974156656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974156654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3d76a0964ad3a1448706da0cf801c02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetObjects:
-  - {fileID: 485724863}
-  - {fileID: 1520491548}
 --- !u!1 &1983186747
 GameObject:
   m_ObjectHideFlags: 0
