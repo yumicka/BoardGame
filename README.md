@@ -2,10 +2,10 @@
 Board game with multiple players and characters
 
 **Todo list:**
-- [ ] Multiple cursors
+- [x] Multiple cursors
 - [ ] Main menu animations
 - [ ] Main menu buttons (start, quit, settings)
-- [ ] Characters selections screen with animations
+- [x] Characters selections screen with animations
 - [ ] Settings scene
 - [ ] Board scene with throwable dice
 - [ ] Game logic with multiple players
