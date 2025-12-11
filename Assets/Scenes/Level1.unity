@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b9c42c7619348b4785b52ea9e76ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rolledNumberText: {fileID: 0}
+  rolledNumberText: {fileID: 1430488260}
 --- !u!1 &717792715
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,6 +712,7 @@ GameObject:
   - component: {fileID: 792292322}
   - component: {fileID: 792292321}
   - component: {fileID: 792292320}
+  - component: {fileID: 792292324}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -808,6 +809,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &792292324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792292319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289de02c8fd8650468563f31ce87773f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1207907554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,10 +1399,10 @@ RectTransform:
   - {fileID: 1430488259}
   m_Father: {fileID: 1427725914}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 388, y: -26}
-  m_SizeDelta: {x: 103.6848, y: 35.394104}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -90.8, y: -35}
+  m_SizeDelta: {x: 103.684814, y: 35.394104}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1555903611
 MonoBehaviour:

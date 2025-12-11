@@ -12,7 +12,7 @@ public class FadeScript : MonoBehaviour
         tempColor = img.color;
         tempColor.a = 1f;
         img.color = tempColor;
-        StartCoroutine(FadeIn(0.20f));
+        StartCoroutine(FadeIn(0.10f));
     }
 
     public IEnumerator FadeIn(float fadeSpeed)
