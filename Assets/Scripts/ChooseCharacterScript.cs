@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ChooseCharacterScript : MonoBehaviour
@@ -6,8 +7,9 @@ public class ChooseCharacterScript : MonoBehaviour
     int characterIndex;
 
     public GameObject inputField;
+    public GameObject playerCountInput;
     string characterName;
-    public int playerCount = 2;
+    string playerCount;
     public SceneChanger sceneChanger;
 
     private void Awake()
@@ -43,19 +45,69 @@ public class ChooseCharacterScript : MonoBehaviour
         characters[characterIndex].SetActive(true);
     }
 
+    //public void Play()
+    //{
+    //    characterName = inputField.GetComponent<TMPro.TMP_InputField>().text;
+    //    playerCount = playerCountInput.GetComponent<TMPro.TMP_InputField>();
+    //    if (characterName.Length >= 3)
+    //    {
+    //        PlayerPrefs.SetInt("SelectedCharacter", characterIndex);
+    //        PlayerPrefs.SetString("PlayerName", characterName);
+    //        PlayerPrefs.SetInt("PlayerCount", playerCount);
+    //        StartCoroutine(sceneChanger.Delay("play", characterIndex, characterName));
+    //    }
+    //    else
+    //    {
+    //        inputField.GetComponent<TMPro.TMP_InputField>().Select();
+    //    }
+
+    //    if (!int.TryParse(playerCount, out int playerCount))
+    //    {
+    //        playerCountInput.Select();
+    //        playerCountInput.ActivateInputField();
+    //        return;
+    //    }
+    //}
+
     public void Play()
     {
-        characterName = inputField.GetComponent<TMPro.TMP_InputField>().text;
-        if(characterName.Length >= 3)
+
+
+        TMP_InputField nameField = inputField.GetComponent<TMP_InputField>();
+        TMP_InputField countField = playerCountInput.GetComponent<TMP_InputField>();
+
+        string characterName = nameField.text.Trim();
+        string playersText = countField.text.Trim();
+ 
+        if (characterName.Length < 3)
         {
-            PlayerPrefs.SetInt("SelectedCharacter", characterIndex);
-            PlayerPrefs.SetString("PlayerName", characterName);
-            PlayerPrefs.SetInt("PlayerCount", playerCount);
-            StartCoroutine(sceneChanger.Delay("play", characterIndex, characterName));
+            nameField.Select();
+            nameField.ActivateInputField();
+            return;
         }
-        else
+
+
+        if (!int.TryParse(playersText, out int playerCount))
         {
-            inputField.GetComponent<TMPro.TMP_InputField>().Select();
+            countField.Select();
+            countField.ActivateInputField();
+            return;
         }
+
+        // (опционально) ограничения
+        if (playerCount <= 1 || playerCount > 7)
+        {
+            countField.Select();
+            countField.ActivateInputField();
+            return;
+        }
+
+        PlayerPrefs.SetInt("SelectedCharacter", characterIndex);
+        PlayerPrefs.SetString("PlayerName", characterName);
+        PlayerPrefs.SetInt("PlayerCount", playerCount);
+        PlayerPrefs.Save();
+
+        StartCoroutine(sceneChanger.Delay("play", characterIndex, characterName));
     }
+
 }

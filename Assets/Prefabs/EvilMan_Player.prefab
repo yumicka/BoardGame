@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 5651984771025065967}
   - component: {fileID: 8094738259113184755}
   - component: {fileID: 2736978025691179772}
+  - component: {fileID: 7712109349533812554}
   m_Layer: 0
   m_Name: EvilMan_Player
   m_TagString: Untagged
@@ -300,3 +301,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747822a636e01bc448cbb29974dc11e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7712109349533812554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3674981127654148206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52789704f9375cd4090a1f6c4fee8f27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  speed: 4
