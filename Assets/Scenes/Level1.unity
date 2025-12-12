@@ -2777,6 +2777,7 @@ GameObject:
   - component: {fileID: 689361568}
   - component: {fileID: 689361569}
   - component: {fileID: 689361571}
+  - component: {fileID: 689361572}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -2909,6 +2910,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveFileName: mansFails.json
+--- !u!114 &689361572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689361562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 578c2fa16453c1948b65b640df7aaf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &689761296
 GameObject:
   m_ObjectHideFlags: 0
@@ -3915,7 +3928,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -8537,7 +8550,7 @@ GameObject:
   - component: {fileID: 1748874952}
   - component: {fileID: 1748874951}
   m_Layer: 0
-  m_Name: GUI_3
+  m_Name: Flag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9543,6 +9556,7 @@ MonoBehaviour:
   maxRandForcVal: 3000
   startRollingForce: 1000
   diceFaceNum: 
+  canRoll: 1
   isLanded: 0
   firstThrow: 0
 --- !u!1 &1986162830

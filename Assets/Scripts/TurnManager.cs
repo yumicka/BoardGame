@@ -97,6 +97,13 @@ public class TurnManager : MonoBehaviour
 
         string winnerName = winner.GetPlayerName();
 
+        
+        float time = RunTimer.Instance != null ? RunTimer.Instance.GetElapsedSeconds() : 0f;
+
+        if (LeaderboardFile.Instance != null)
+            LeaderboardFile.Instance.AddResult(winnerName, time);
+
+
         if (winnerText != null)
             winnerText.text = $"{winnerName} wins!";
 
@@ -105,6 +112,15 @@ public class TurnManager : MonoBehaviour
 
         Time.timeScale = 0f;
     }
+
+    private string FormatTime(float seconds)
+    {
+        int m = Mathf.FloorToInt(seconds / 60f);
+        int s = Mathf.FloorToInt(seconds % 60f);
+        int ms = Mathf.FloorToInt((seconds * 1000f) % 1000f);
+        return $"{m:00}:{s:00}.{ms:000}";
+    }
+
 
     public void RestartGame()
     {
