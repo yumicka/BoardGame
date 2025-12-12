@@ -4,6 +4,7 @@ using UnityEngine;
 public class NameScript : MonoBehaviour
 {
     TextMeshPro tMP;
+    public string PlayerName { get; private set; }
     private void Awake()
     {
         tMP = transform.Find("NameField").gameObject.GetComponent<TextMeshPro>();
@@ -11,6 +12,7 @@ public class NameScript : MonoBehaviour
 
     public void SetName(string name)
     {
+        PlayerName = name;
         tMP.text = name;
         tMP.color = new Color32(
             (byte)Random.Range(0, 256), (byte)Random.Range(0, 255), (byte)Random.Range(0, 255), 255);

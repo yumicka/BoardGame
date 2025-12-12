@@ -75,10 +75,14 @@ public class TurnManager : MonoBehaviour
         UpdateUI(steps.ToString());
     }
 
+
     private void UpdateUI(string rolled)
     {
         if (turnText != null)
-            turnText.text = $"Ход: Игрок {currentPlayer + 1}";
+        {
+            string playerName = players[currentPlayer].GetPlayerName();
+            turnText.text = $"It is {playerName}'s turn!";
+        }
 
         if (rolledText != null)
             rolledText.text = rolled;

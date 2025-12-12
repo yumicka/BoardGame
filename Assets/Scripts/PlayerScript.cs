@@ -20,7 +20,6 @@ public class PlayerScript : MonoBehaviour
 
         if (boardPath == null)
         {
-            Debug.LogError("boardPath не назначен! Перетащи BoardPath из сцены в инспектор.");
             return;
         }
 
@@ -37,7 +36,7 @@ public class PlayerScript : MonoBehaviour
         );
 
         mainCharacter.GetComponent<NameScript>()
-            .SetName(PlayerPrefs.GetString("PlayerName", "Jagit Ler"));
+            .SetName(PlayerPrefs.GetString("PlayerName", "Jane Doe"));
 
         AssignPath(mainCharacter, path);
 
@@ -78,7 +77,6 @@ public class PlayerScript : MonoBehaviour
         PlayerMover mover = playerObj.GetComponent<PlayerMover>();
         if (mover == null)
         {
-            Debug.LogWarning($"На игроке {playerObj.name} нет PlayerMover. Добавь компонент на префаб.");
             return;
         }
 
@@ -91,16 +89,13 @@ public class PlayerScript : MonoBehaviour
 
     private Transform[] BuildPathFromBoard(Transform board)
     {
-        // Получаем ВСЕ трансформы (первый будет сам board)
         Transform[] raw = board.GetComponentsInChildren<Transform>();
 
         if (raw.Length <= 1)
         {
-            Debug.LogError("В BoardPath нет дочерних клеток (Cell_0, Cell_1, ...).");
             return new Transform[0];
         }
 
-        // Убираем первый элемент (сам BoardPath)
         Transform[] result = new Transform[raw.Length - 1];
         for (int i = 1; i < raw.Length; i++)
             result[i - 1] = raw[i];

@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
-    [SerializeField] private Transform[] path;   
+    [SerializeField] private Transform[] path;
     [SerializeField] private float speed = 4f;
     [SerializeField] private float heightOffset = 0.5f;
+    [SerializeField] private float spread = 0.25f;
     public int CellIndex { get; private set; } = 0;
     public bool IsMoving { get; private set; } = false;
 
@@ -13,7 +14,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void SetPath(Transform[] newPath)
@@ -25,9 +26,34 @@ public class PlayerMover : MonoBehaviour
     public void SetToStart()
     {
         CellIndex = 0;
-        if (path != null && path.Length > 0 && path[0] != null)
-            transform.position = path[0].position + Vector3.up * heightOffset;
 
+        if (path == null || path.Length == 0 || path[0] == null)
+            return;
+
+        transform.position = GetCellPosition(CellIndex);
+    }
+
+    public string GetPlayerName()
+    {
+        NameScript nameScript = GetComponent<NameScript>();
+        if (nameScript != null && !string.IsNullOrEmpty(nameScript.PlayerName))
+            return nameScript.PlayerName;
+
+        return gameObject.name;
+    }
+
+    private Vector3 GetCellPosition(int cellIndex)
+    {
+        if (path == null || path.Length == 0) return transform.position;
+        cellIndex = Mathf.Clamp(cellIndex, 0, path.Length - 1);
+
+        Vector3 basePos = path[cellIndex].position + Vector3.up * heightOffset;
+
+        Vector3 offset = Vector3.zero;
+        if (BoardOccupancy.Instance != null)
+            offset = BoardOccupancy.Instance.RegisterAndGetOffset(this, cellIndex, spread);
+
+        return basePos + offset;
     }
 
     public IEnumerator MoveSteps(int steps)
@@ -45,15 +71,11 @@ public class PlayerMover : MonoBehaviour
             if (next == CellIndex) break;
 
             CellIndex = next;
-            Vector3 target = path[CellIndex].position + Vector3.up * heightOffset;
+            Vector3 target = GetCellPosition(CellIndex);
 
             while (Vector3.Distance(transform.position, target) > 0.01f)
             {
-                transform.position = Vector3.MoveTowards(
-                    transform.position,
-                    target,
-                    speed * Time.deltaTime
-                );
+                transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
                 yield return null;
             }
 
@@ -68,5 +90,4 @@ public class PlayerMover : MonoBehaviour
             animator.SetBool("idle", true);
         }
     }
-
 }
