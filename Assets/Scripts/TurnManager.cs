@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -8,12 +9,16 @@ public class TurnManager : MonoBehaviour
     [SerializeField] private DiceRollScript dice;
     [SerializeField] private TMP_Text turnText;
     [SerializeField] private TMP_Text rolledText;
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private TMP_Text winnerText;
+
 
     private List<PlayerMover> players;
     private int currentPlayer = 0;
 
     private bool wasLanded = false;
     private bool processing = false;
+    private bool gameOver = false;
 
     private void Start()
     {
@@ -40,12 +45,12 @@ public class TurnManager : MonoBehaviour
 
     private void Update()
     {
-        if (dice == null || processing || players == null || players.Count == 0) return;
+        if (dice == null || processing || players == null || players.Count == 0 || gameOver) return;
 
-        // ловим момент: НЕ приземлилась -> приземлилась
         if (!wasLanded && dice.isLanded)
         {
             wasLanded = true;
+
             StartCoroutine(HandleDiceResult());
         }
         else if (wasLanded && !dice.isLanded)
@@ -67,7 +72,17 @@ public class TurnManager : MonoBehaviour
 
         UpdateUI(steps.ToString());
 
+        dice.canRoll = false;
         yield return players[currentPlayer].MoveSteps(steps);
+        dice.canRoll = true;
+
+
+        if (players[currentPlayer].IsAtFinish())
+        {
+            DeclareWinner(players[currentPlayer]);
+            yield break;
+        }
+
 
         currentPlayer = (currentPlayer + 1) % players.Count;
 
@@ -75,6 +90,27 @@ public class TurnManager : MonoBehaviour
         UpdateUI(steps.ToString());
     }
 
+
+    private void DeclareWinner(PlayerMover winner)
+    {
+        gameOver = true;
+
+        string winnerName = winner.GetPlayerName();
+
+        if (winnerText != null)
+            winnerText.text = $"{winnerName} wins!";
+
+        if (winPanel != null)
+            winPanel.SetActive(true);
+
+        Time.timeScale = 0f;
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     private void UpdateUI(string rolled)
     {

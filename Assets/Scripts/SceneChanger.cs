@@ -35,6 +35,7 @@ public class SceneChanger : MonoBehaviour
             SceneManager.LoadScene(1, LoadSceneMode.Single);
         }else if(string.Equals(command, "menu", System.StringComparison.OrdinalIgnoreCase))
         {
+
             yield return fadeScript.FadeOut(0.2f);
             SceneManager.LoadScene(0, LoadSceneMode.Single);
         }
@@ -42,6 +43,7 @@ public class SceneChanger : MonoBehaviour
 
     public void GoToMenu()
     {
+        Time.timeScale = 1f;
         StartCoroutine(Delay("menu", -1, ""));
     }
 }

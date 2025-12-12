@@ -56,6 +56,12 @@ public class PlayerMover : MonoBehaviour
         return basePos + offset;
     }
 
+    public bool IsAtFinish()
+    {
+        return path != null && path.Length > 0 && CellIndex >= path.Length - 1;
+    }
+
+
     public IEnumerator MoveSteps(int steps)
     {
         if (path == null || path.Length == 0) yield break;

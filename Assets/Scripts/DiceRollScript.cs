@@ -7,6 +7,7 @@ public class DiceRollScript : MonoBehaviour
     [SerializeField] private float maxRandForcVal, startRollingForce;
     float forceX, forceY, forceZ;
     public string diceFaceNum;
+    public bool canRoll = true;
     public bool isLanded = false;
     public bool firstThrow = false;
 
@@ -47,6 +48,8 @@ public class DiceRollScript : MonoBehaviour
 
     void Update()
     {
+        if (!canRoll) return;
+
         if (rBody != null)
         {
             if (Input.GetMouseButtonDown(0) && isLanded ||
