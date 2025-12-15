@@ -862,7 +862,6 @@ GameObject:
   m_Component:
   - component: {fileID: 221913045}
   - component: {fileID: 221913047}
-  - component: {fileID: 221913046}
   - component: {fileID: 221913048}
   m_Layer: 5
   m_Name: VolumeSlider
@@ -893,18 +892,6 @@ RectTransform:
   m_AnchoredPosition: {x: 210, y: 100}
   m_SizeDelta: {x: 473.857, y: 52.877}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &221913046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 221913044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acad78cef83a57a47b8d92bec8e1e3a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &221913047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5226,7 +5213,6 @@ GameObject:
   - component: {fileID: 887427072}
   - component: {fileID: 887427073}
   - component: {fileID: 887427075}
-  - component: {fileID: 887427074}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -5324,18 +5310,6 @@ MonoBehaviour:
   inputField: {fileID: 363804352}
   playerCountInput: {fileID: 2073299571}
   sceneChanger: {fileID: 887427072}
---- !u!114 &887427074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887427066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0946ad9820851bf44980bea567be75a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &887427075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9322,6 +9296,30 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 221913048}
           m_TargetAssemblyTypeName: VolumeSettings, Assembly-CSharp
+          m_MethodName: ResetSettings
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1718399283}
+          m_TargetAssemblyTypeName: QualityDropdown, Assembly-CSharp
+          m_MethodName: ResetSettings
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 335151225}
+          m_TargetAssemblyTypeName: FullScreenToggle, Assembly-CSharp
           m_MethodName: ResetSettings
           m_Mode: 1
           m_Arguments:

@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,15 +20,13 @@ public class SceneChanger : MonoBehaviour
             yield return fadeScript.FadeOut(0.3f);
             PlayerPrefs.DeleteAll();
 
-            if(UnityEditor.EditorApplication.isPlaying )
-            {
-                UnityEditor.EditorApplication.isPlaying = false;
-            }
-            else
-            {
-                Application.Quit();
-            }
-        }else if(string.Equals(command, "play", System.StringComparison.OrdinalIgnoreCase))
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+        else if(string.Equals(command, "play", System.StringComparison.OrdinalIgnoreCase))
         {
            
             yield return fadeScript.FadeOut(0.2f);

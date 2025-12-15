@@ -6,6 +6,8 @@ public class VolumeSettings : MonoBehaviour
 {
     [SerializeField] private AudioMixer mixer;
     [SerializeField] private Slider slider;
+    private float initialVolume;
+
 
     private const string VolumeKey = "volume";
     private const float DefaultVolume = 1f;
@@ -13,6 +15,8 @@ public class VolumeSettings : MonoBehaviour
     private void Start()
     {
         float saved = PlayerPrefs.GetFloat(VolumeKey, DefaultVolume);
+
+        initialVolume = saved;
         slider.value = saved;
         SetVolume(saved);
 
@@ -22,6 +26,7 @@ public class VolumeSettings : MonoBehaviour
             PlayerPrefs.SetFloat(VolumeKey, v);
         });
     }
+
 
     public void SetVolume(float value)
     {
@@ -37,8 +42,9 @@ public class VolumeSettings : MonoBehaviour
 
     public void ResetSettings()
     {
-        slider.value = DefaultVolume;
-        SetVolume(DefaultVolume);
-        PlayerPrefs.SetFloat(VolumeKey, DefaultVolume);
+        slider.value = initialVolume;
+        SetVolume(initialVolume);
+        PlayerPrefs.SetFloat(VolumeKey, initialVolume);
     }
+
 }

@@ -13,7 +13,7 @@ public class SetActiveButtonScript : MonoBehaviour
 
     private IEnumerator ToggleActiveCoroutine(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSecondsRealtime(delay);
 
         
         foreach (var screen in allScreens)
