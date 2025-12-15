@@ -23,7 +23,6 @@ public class PlayerScript : MonoBehaviour
             return;
         }
 
-        // Собираем путь из детей BoardPath (Cell_0, Cell_1, ...)
         Transform[] path = BuildPathFromBoard(boardPath);
 
         characterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);

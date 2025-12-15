@@ -96,4 +96,36 @@ public class PlayerMover : MonoBehaviour
             animator.SetBool("idle", true);
         }
     }
+
+    public IEnumerator DieAndReturnToStart(float dieAnimTime = 1.0f)
+    {
+        IsMoving = true;
+
+        if (animator != null)
+        {
+            animator.SetBool("walk", false);
+            animator.SetBool("idle", false);
+
+            // Лучше триггером, чем bool'ом
+            animator.SetTrigger("die"); // сделай Trigger "die" в Animator
+        }
+
+        // ждём пока проиграется смерть
+        yield return new WaitForSeconds(dieAnimTime);
+
+        // телепорт на старт
+        CellIndex = 0;
+
+        // важно: пересчитать позицию через GetCellPosition, чтобы сохранились оффсеты от BoardOccupancy
+        transform.position = GetCellPosition(CellIndex);
+
+        if (animator != null)
+        {
+            animator.ResetTrigger("die");
+            animator.SetBool("idle", true);
+        }
+
+        IsMoving = false;
+    }
+
 }

@@ -12,7 +12,9 @@ public class LeaderboardFile : MonoBehaviour
     {
         public string name;
         public float timeSeconds;
-        public string dateUtc; // чтобы было не просто "кто-то когда-то"
+        public int steps;
+        public int score;
+        public string dateUtc;
     }
 
     [Serializable]
@@ -43,19 +45,28 @@ public class LeaderboardFile : MonoBehaviour
 
     public IReadOnlyList<Entry> GetEntries() => data.entries;
 
-    public void AddResult(string playerName, float timeSeconds)
+    public void AddResult(string playerName, float timeSeconds, int steps, int score)
     {
         if (string.IsNullOrWhiteSpace(playerName)) playerName = "Unknown";
         if (timeSeconds < 0f) timeSeconds = 0f;
+        if (steps < 0) steps = 0;
 
         data.entries.Add(new Entry
         {
             name = playerName.Trim(),
             timeSeconds = timeSeconds,
+            steps = steps,
+            score = score,
             dateUtc = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss 'UTC'")
         });
 
-        data.entries.Sort((a, b) => a.timeSeconds.CompareTo(b.timeSeconds));
+        // ?? Сортируем по очкам (больше = лучше), при равенстве по времени (меньше = лучше)
+        data.entries.Sort((a, b) =>
+        {
+            int byScore = b.score.CompareTo(a.score);
+            if (byScore != 0) return byScore;
+            return a.timeSeconds.CompareTo(b.timeSeconds);
+        });
 
         if (data.entries.Count > maxEntries)
             data.entries.RemoveRange(maxEntries, data.entries.Count - maxEntries);

@@ -15,16 +15,21 @@ public class TurnManager : MonoBehaviour
 
     private List<PlayerMover> players;
     private int currentPlayer = 0;
+    private int totalStepsThisRun = 0;
+    private int baseScore = 10000;
+    private float timePenalty = 20f;
+    private int stepPenalty = 50;
+    private float runStartTime;
 
     private bool wasLanded = false;
     private bool processing = false;
     private bool gameOver = false;
 
+    private Dictionary<PlayerMover, int> stepsByPlayer = new Dictionary<PlayerMover, int>();
+
     private void Start()
     {
         if (dice == null) dice = FindFirstObjectByType<DiceRollScript>();
-
-        // ∆дЄм 1 кадр, чтобы PlayerScript успел заспавнить игроков
         StartCoroutine(InitAfterSpawn());
     }
 
@@ -40,7 +45,14 @@ public class TurnManager : MonoBehaviour
             yield break;
         }
 
+        runStartTime = Time.time;
+
+        stepsByPlayer.Clear();
+        foreach (var p in players)
+            stepsByPlayer[p] = 0;
+
         UpdateUI("?");
+
     }
 
     private void Update()
@@ -74,6 +86,21 @@ public class TurnManager : MonoBehaviour
 
         dice.canRoll = false;
         yield return players[currentPlayer].MoveSteps(steps);
+
+
+        var p = players[currentPlayer];
+        stepsByPlayer[p] += steps;
+
+        var landedCell = GetCurrentCellTransform(p);
+        if (landedCell != null)
+        {
+            var death = landedCell.GetComponent<DeathCell>();
+            if (death != null)
+            {
+                yield return p.DieAndReturnToStart(death.DieAnimTime);
+            }
+        }
+
         dice.canRoll = true;
 
 
@@ -90,6 +117,20 @@ public class TurnManager : MonoBehaviour
         UpdateUI(steps.ToString());
     }
 
+    private Transform GetCurrentCellTransform(PlayerMover mover)
+    {
+        
+        var board = GameObject.Find("Path");
+        if (board == null)
+            return null;
+
+        if (mover.CellIndex < 0 || mover.CellIndex >= board.transform.childCount) 
+            return null;
+
+        return board.transform.GetChild(mover.CellIndex);
+    }
+
+
 
     private void DeclareWinner(PlayerMover winner)
     {
@@ -97,15 +138,19 @@ public class TurnManager : MonoBehaviour
 
         string winnerName = winner.GetPlayerName();
 
-        
-        float time = RunTimer.Instance != null ? RunTimer.Instance.GetElapsedSeconds() : 0f;
+        float time = Time.time - runStartTime;
 
-        if (LeaderboardFile.Instance != null)
-            LeaderboardFile.Instance.AddResult(winnerName, time);
+        int winnerSteps = stepsByPlayer.TryGetValue(winner, out var s) ? s : 0;
+
+        int score = Mathf.Max(0,
+            Mathf.RoundToInt(baseScore - time * timePenalty - winnerSteps * stepPenalty));
+
+        LeaderboardFile.Instance?.AddResult(winnerName, time, winnerSteps, score);
 
 
         if (winnerText != null)
-            winnerText.text = $"{winnerName} wins!";
+            if (winnerText != null)
+                winnerText.text = $"{winnerName} wins!\nTime: {time:0.00}s\nSteps: {winnerSteps}\nScore: {score}";
 
         if (winPanel != null)
             winPanel.SetActive(true);

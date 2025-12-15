@@ -30,13 +30,21 @@ public class LeaderboardUI : MonoBehaviour
         }
 
         var sb = new StringBuilder();
+
         for (int i = 0; i < entries.Count; i++)
         {
-            sb.Append($"{i + 1}. {entries[i].name}  -  {FormatTime(entries[i].timeSeconds)}\n");
+            var e = entries[i];
+
+            sb.AppendLine(
+                $"{i + 1,4}) " +
+                $"{e.name,-10} Score: " +
+                $"{e.score,5} " 
+            );
         }
 
         leaderboardText.text = sb.ToString();
     }
+
 
     private string FormatTime(float seconds)
     {
